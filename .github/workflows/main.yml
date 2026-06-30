@@ -5,13 +5,18 @@ jobs:
     runs-on: windows-latest
     steps:
     - uses: actions/checkout@v4
-    - uses: actions/setup-python@v5
+
+    - name: Python 32-bit
+      uses: actions/setup-python@v5
       with:
         python-version: '3.11'
+        architecture: 'x86'
+
     - run: pip install pygame pyinstaller
-    - run: pyinstaller --noconfirm --onedir --windowed --name "Missao_na_Escola" main.py
+
+    - run: pyinstaller --noconfirm --onefile --windowed --name "Missao_na_Escola_32bit" main.py
+
     - uses: actions/upload-artifact@v4
       with:
-        name: Missao_na_Escola_EXE
-        path: dist/Missao_na_Escola/
-        
+        name: Missao_na_Escola_32bit
+        path: dist/Missao_na_Escola_32bit.exe
